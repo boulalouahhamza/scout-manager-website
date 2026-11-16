@@ -1,0 +1,689 @@
+/* ============================================================
+   كشفيتي — موقع التطبيق
+   التنسيق مطابق لهوية التطبيق: أخضر كشفي + ذهبي، خط Cairo
+   ============================================================ */
+
+:root {
+  /* الألوان — من AppColors في التطبيق */
+  --primary: #1B7A43;
+  --primary-dark: #0E5A31;
+  --primary-light: #4CAF50;
+  --mint: #E6F2EA;
+  --gold: #C9A227;
+  --gold-soft: rgba(201, 162, 39, 0.14);
+  --background: #F3F7F3;
+  --surface: #FFFFFF;
+  --border: #D5E2D8;
+  --text-primary: #1E2A22;
+  --text-secondary: #5B6B60;
+
+  --radius-card: 18px;
+  --radius-btn: 14px;
+  --shadow: 0 2px 12px rgba(14, 90, 49, 0.08);
+  --shadow-hover: 0 8px 24px rgba(14, 90, 49, 0.14);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Cairo', sans-serif;
+  background: var(--background);
+  color: var(--text-primary);
+  line-height: 1.7;
+  direction: rtl;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.container {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ---------- الترويسة ---------- */
+.site-header {
+  background: var(--primary);
+  color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 10px rgba(14, 90, 49, 0.25);
+}
+
+.site-header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 62px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #fff;
+  font-weight: 800;
+  font-size: 1.1rem;
+}
+
+.brand img {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #fff;
+  padding: 3px;
+}
+
+.main-nav {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.main-nav a {
+  color: rgba(255, 255, 255, 0.88);
+  padding: 8px 14px;
+  border-radius: var(--radius-btn);
+  font-weight: 700;
+  font-size: 0.92rem;
+  transition: background 0.2s, color 0.2s;
+}
+
+.main-nav a:hover {
+  background: rgba(255, 255, 255, 0.14);
+  color: #fff;
+}
+
+.main-nav a.active {
+  background: #fff;
+  color: var(--primary);
+}
+
+/* ---------- القسم الرئيسي (Hero) ---------- */
+.hero {
+  background: linear-gradient(160deg, var(--primary-dark) 0%, var(--primary) 65%, var(--primary-light) 100%);
+  color: #fff;
+  padding: 72px 0 84px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  top: -80px;
+  left: -80px;
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  background: rgba(201, 162, 39, 0.18);
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  bottom: -120px;
+  right: -60px;
+  width: 380px;
+  height: 380px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.hero .container {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  position: relative;
+  z-index: 1;
+  flex-wrap: wrap;
+  justify-content: center;
+  text-align: center;
+}
+
+.hero-text {
+  flex: 1 1 420px;
+}
+
+.hero .eyebrow {
+  display: inline-block;
+  background: var(--gold-soft);
+  border: 1px solid rgba(201, 162, 39, 0.5);
+  color: #F5DE8C;
+  padding: 4px 16px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin-bottom: 18px;
+}
+
+.hero h1 {
+  font-size: clamp(1.9rem, 5vw, 2.8rem);
+  font-weight: 800;
+  line-height: 1.35;
+  margin-bottom: 14px;
+}
+
+.hero h1 .accent {
+  color: #F5DE8C;
+}
+
+.hero p {
+  font-size: 1.05rem;
+  color: rgba(255, 255, 255, 0.88);
+  max-width: 560px;
+  margin: 0 auto 28px;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.hero-logo {
+  flex: 0 1 300px;
+  display: flex;
+  justify-content: center;
+}
+
+.hero-logo .logo-badge {
+  width: 230px;
+  height: 230px;
+  background: #fff;
+  border-radius: 50%;
+  padding: 26px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.28), 0 0 0 10px rgba(255, 255, 255, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* الشعار يُقص دائرياً كما في التطبيق (ClipOval) */
+.hero-logo .logo-badge img,
+.logo-badge-sm img {
+  border-radius: 50%;
+}
+
+/* ---------- الأزرار ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px 30px;
+  border-radius: var(--radius-btn);
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s, background 0.2s;
+  border: none;
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn-primary {
+  background: #fff;
+  color: var(--primary);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+}
+
+.btn-primary:hover {
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.28);
+}
+
+.btn-gold {
+  background: var(--gold);
+  color: #fff;
+}
+
+.btn-gold:hover {
+  background: #B08D1E;
+}
+
+.btn-outline {
+  background: transparent;
+  color: #fff;
+  border: 2px solid rgba(255, 255, 255, 0.7);
+}
+
+.btn-outline:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.btn-green {
+  background: var(--primary);
+  color: #fff;
+}
+
+.btn-green:hover {
+  background: var(--primary-dark);
+}
+
+.btn-lg {
+  padding: 16px 40px;
+  font-size: 1.1rem;
+}
+
+/* ---------- الأقسام ---------- */
+.section {
+  padding: 64px 0;
+}
+
+.section-alt {
+  background: var(--surface);
+}
+
+.section-head {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto 40px;
+}
+
+.section-head .kicker {
+  color: var(--gold);
+  font-weight: 800;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+}
+
+.section-head h2 {
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 800;
+  margin: 4px 0 10px;
+}
+
+.section-head p {
+  color: var(--text-secondary);
+}
+
+/* ---------- بطاقات الميزات ---------- */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 18px;
+}
+
+.feature-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  padding: 24px 20px;
+  box-shadow: var(--shadow);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.feature-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+}
+
+.feature-card .icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: rgba(27, 122, 67, 0.12);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  margin-bottom: 14px;
+}
+
+.feature-card h3 {
+  font-size: 1.05rem;
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+
+.feature-card p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+/* ---------- صفحات المحتوى ---------- */
+.page-hero {
+  background: linear-gradient(150deg, var(--primary-dark), var(--primary));
+  color: #fff;
+  text-align: center;
+  padding: 52px 0;
+}
+
+.page-hero h1 {
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  font-weight: 800;
+}
+
+.page-hero p {
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 600px;
+  margin: 8px auto 0;
+}
+
+.content-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  padding: 28px;
+  box-shadow: var(--shadow);
+  margin-bottom: 20px;
+}
+
+.content-card h2 {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1.2rem;
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+
+.content-card h2 .icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 13px;
+  background: rgba(27, 122, 67, 0.12);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.content-card p {
+  color: var(--text-secondary);
+}
+
+.content-card ul {
+  color: var(--text-secondary);
+  padding-right: 20px;
+}
+
+.content-card li {
+  margin-bottom: 6px;
+}
+
+.content-card li strong {
+  color: var(--text-primary);
+}
+
+/* ---------- صفحة المطور ---------- */
+.dev-profile {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.dev-avatar {
+  width: 108px;
+  height: 108px;
+  border-radius: 26px;
+  overflow: hidden;
+  border: 3px solid var(--primary);
+  box-shadow: var(--shadow-hover);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.dev-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 22%;
+}
+
+.dev-info h3 {
+  font-size: 1.25rem;
+  font-weight: 800;
+}
+
+.dev-info .role {
+  color: var(--gold);
+  font-weight: 700;
+  font-size: 0.92rem;
+  margin-bottom: 8px;
+}
+
+.contact-list {
+  list-style: none;
+}
+
+.contact-list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+  color: var(--text-secondary);
+}
+
+.contact-list .ci {
+  width: 36px;
+  height: 36px;
+  border-radius: 11px;
+  background: rgba(27, 122, 67, 0.12);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.contact-list a {
+  font-weight: 700;
+}
+
+.socials {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(27, 122, 67, 0.08);
+  border: 1px solid rgba(27, 122, 67, 0.35);
+  color: var(--primary);
+  padding: 7px 16px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.88rem;
+  transition: background 0.2s;
+}
+
+.chip:hover {
+  background: rgba(27, 122, 67, 0.16);
+}
+
+/* ---------- صفحة التحميل ---------- */
+.download-panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  box-shadow: var(--shadow-hover);
+  padding: 40px 30px;
+  text-align: center;
+  max-width: 620px;
+  margin: -56px auto 0;
+  position: relative;
+  z-index: 2;
+}
+
+.download-panel .logo-badge-sm {
+  width: 96px;
+  height: 96px;
+  margin: 0 auto 16px;
+  background: #fff;
+  border-radius: 24px;
+  box-shadow: var(--shadow);
+  padding: 12px;
+}
+
+.download-panel h2 {
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+
+.download-panel .version {
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+  margin-bottom: 22px;
+}
+
+.apk-meta {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 26px;
+}
+
+.apk-meta .tag {
+  background: var(--mint);
+  color: var(--primary-dark);
+  border-radius: 999px;
+  padding: 5px 16px;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.steps {
+  text-align: right;
+  max-width: 560px;
+  margin: 34px auto 0;
+  counter-reset: step;
+}
+
+.steps li {
+  position: relative;
+  padding: 0 56px 22px 0;
+  list-style: none;
+}
+
+.steps li::before {
+  counter-increment: step;
+  content: counter(step);
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  background: var(--primary);
+  color: #fff;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.steps h3 {
+  font-size: 1rem;
+  font-weight: 800;
+  margin-bottom: 2px;
+}
+
+.steps p {
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+}
+
+.note {
+  background: var(--gold-soft);
+  border: 1px solid rgba(201, 162, 39, 0.45);
+  border-radius: var(--radius-card);
+  padding: 14px 18px;
+  color: #7A6414;
+  font-size: 0.92rem;
+  max-width: 560px;
+  margin: 30px auto 0;
+  text-align: right;
+}
+
+/* ---------- التذييل ---------- */
+.site-footer {
+  background: var(--primary-dark);
+  color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  padding: 30px 20px;
+  margin-top: 40px;
+  font-size: 0.9rem;
+}
+
+.site-footer .logo-line {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-weight: 800;
+  color: #fff;
+  font-size: 1.05rem;
+  margin-bottom: 8px;
+}
+
+.site-footer img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #fff;
+  padding: 2px;
+}
+
+.site-footer a {
+  color: #F5DE8C;
+}
+
+/* ---------- التجاوب ---------- */
+@media (max-width: 640px) {
+  .site-header .container {
+    flex-direction: column;
+    padding: 10px 0;
+  }
+
+  .main-nav {
+    justify-content: center;
+  }
+
+  .hero {
+    padding: 48px 0 72px;
+  }
+
+  .hero-logo .logo-badge {
+    width: 170px;
+    height: 170px;
+    padding: 20px;
+  }
+
+  .content-card {
+    padding: 20px;
+  }
+}
